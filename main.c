@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
         printf("Error: less than 1 args\n");
         return 0;
     }
-    //system("rm /etc/ntp.conf");
-    FILE *fd = fopen("/etc/ntp.conf", "a");
+    system("rm /etc/ntp.conf");
+    FILE *fd = fopen("/etc/ntp.conf", "w");
 
     if (strcmp(argv[1], "server") == 0)
     {
