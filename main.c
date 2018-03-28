@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
         printf("Error: less than 1 args\n");
         return 0;
     }
-    system("rm /etc/ntp.conf");
-    FILE *fd = fopen("/etc/ntp.conf", "w");
+    //system("rm /etc/ntp.conf");
+    FILE *fd = fopen("/etc/ntp.conf", "a");
 
     if (strcmp(argv[1], "server") == 0)
     {
@@ -21,12 +21,27 @@ int main(int argc, char *argv[])
     {
         fprintf(fd, "%s %s\n", "restrict", argv[2]);
     }
+
+
+    else if (strcmp(argv[1], "backup") == 0)
+    {
+
+        system("cp /etc/ntp.conf /etc/ntp.conf.backup");
+    }
+
+
     else
     {
        fprintf(fd, "%s %s\n", "server", "127.127.1.1");
     }
 
+
+
+
+
+
     fclose(fd);
+
     system("systemctl restart ntp");
     return 0;
 }
